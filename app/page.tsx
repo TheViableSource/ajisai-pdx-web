@@ -1,8 +1,21 @@
+"use client"; // This is required to control video speed
+
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
+  // 1. Create a reference to the video element
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // 2. Slow down the video when the page loads
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.6; // 0.6 = 60% speed. Change to 0.5 for slower.
+    }
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
@@ -11,13 +24,14 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/50 z-10" /> {/* Overlay for text readability */}
           <video
+            ref={videoRef} // Attach the reference here
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover"
           >
-            {/* CHANGED: Pointing to the local file in the public folder */}
+            {/* Make sure your file is named exactly hero-sushi.mp4 in the public folder */}
             <source src="/hero-sushi.mp4" type="video/mp4" />
           </video>
         </div>
@@ -51,7 +65,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. ZIG-ZAG "MAGAZINE" FEATURE SECTION (Tanaka Style) */}
+      {/* 2. ZIG-ZAG "MAGAZINE" FEATURE SECTION */}
       <section className="w-full bg-ajisai-cream py-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
@@ -59,7 +73,7 @@ export default function Home() {
             <div className="w-24 h-1 bg-ajisai-gold mx-auto" />
           </div>
 
-          {/* Feature 1: Sushi (Text Left, Image Right) */}
+          {/* Feature 1: Sushi */}
           <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <h3 className="text-3xl font-serif text-ajisai-wine">Artisan Sushi</h3>
@@ -80,7 +94,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Feature 2: Ramen (Image Left, Text Right) */}
+          {/* Feature 2: Ramen */}
           <div className="flex flex-col md:flex-row-reverse items-center gap-12 mb-24">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <h3 className="text-3xl font-serif text-ajisai-wine">Handcrafted Ramen</h3>
@@ -101,7 +115,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Feature 3: Steak (Text Left, Image Right) */}
+          {/* Feature 3: Steak */}
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <h3 className="text-3xl font-serif text-ajisai-wine">Premium Steak & Bowls</h3>

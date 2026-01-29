@@ -89,7 +89,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
                <Image 
-                src="/artisan-sushi.jpg" 
+                src="/artisan-sushi.jpg"
                 alt="Sushi Platter" 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -110,7 +110,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
                <Image 
-                src="/handcrafted-ramen.jpg.jpg"
+                src="/handcrafted-ramen.jpg"
                 alt="Ramen Bowl" 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

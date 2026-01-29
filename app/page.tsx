@@ -230,8 +230,7 @@ export default function Home() {
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
                <TiltCard 
-                 src="/wagyu-steak.jpg
-" 
+                 src="/wagyu-steak.jpg" 
                  alt="Wagyu Steak" 
                />
             </div>

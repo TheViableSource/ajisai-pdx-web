@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, ArrowUp, Star, Quote } from "lucide-react"; // Added Icons
+import { ChevronRight, ArrowUp, Star, Quote } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
 // Placeholder Reviews Data
@@ -38,7 +38,6 @@ export default function Home() {
     }
 
     const handleScroll = () => {
-      // Show button after scrolling down 400px
       if (window.scrollY > 400) {
         setShowScrollTop(true);
       } else {
@@ -61,7 +60,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative">
       
-      {/* --- SCROLL TO TOP BUTTON (Fixed) --- */}
+      {/* --- SCROLL TO TOP BUTTON --- */}
       <button
         onClick={scrollToTop}
         className={`fixed bottom-8 right-8 z-50 bg-[#C5A059] text-white p-4 rounded-full shadow-2xl transition-all duration-500 ease-in-out transform hover:scale-110 hover:bg-[#5D182E] group ${
@@ -69,7 +68,6 @@ export default function Home() {
         }`}
         aria-label="Scroll to top"
       >
-        {/* The "Pulse" Ring Effect */}
         <span className="absolute -inset-1 rounded-full border border-[#C5A059] opacity-0 group-hover:opacity-100 group-hover:animate-ping"></span>
         <ArrowUp className="w-6 h-6" />
       </button>
@@ -120,8 +118,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. ZIG-ZAG FEATURE SECTION */}
-      <section className="w-full bg-[#F9F4E8] py-24">
+      {/* 2. ZIG-ZAG FEATURE SECTION WITH PATTERN BACKGROUND */}
+      <section 
+        className="w-full bg-[#F9F4E8] py-24 bg-repeat bg-[length:400px_400px]"
+        style={{ backgroundImage: 'url("/pattern-bg.png")' }}
+      >
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-[#5D182E] text-4xl md:text-5xl font-serif mb-4">Our Culinary Craft</h2>
@@ -193,7 +194,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. NEW REVIEWS SECTION */}
+      {/* 3. REVIEWS SECTION */}
       <section className="w-full bg-white py-24">
         <div className="container mx-auto px-6">
            <div className="text-center mb-16">

@@ -9,6 +9,17 @@ export const metadata: Metadata = {
 
 const menuCategories = [
     {
+        id: "appetizers",
+        title: "Appetizers",
+        description: "Small plates perfect for sharing.",
+        items: [
+            { name: "Edamame", price: "$6.00", description: "Steamed soybeans lightly dusted with sea salt." },
+            { name: "Gyoza", price: "$8.00", description: "Pan-fried pork and vegetable dumplings served with dipping sauce." },
+            { name: "Agedashi Tofu", price: "$8.00", description: "Crispy deep-fried tofu served in a savory dashi broth with bonito flakes." },
+            { name: "Soft Shell Crab", price: "$14.00", description: "Crispy fried soft shell crab served with ponzu sauce." },
+        ],
+    },
+    {
         id: "sushi",
         title: "Sushi & Sashimi",
         description: "Expertly sliced fresh fish, sourced daily.",

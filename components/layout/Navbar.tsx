@@ -14,9 +14,17 @@ const navLinks = [
     { name: "Contact", href: "/contact" },
 ];
 
+import { usePathname } from "next/navigation";
+
+// ...
+
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Define pages that have a dark hero image at the top
+    const isHeroPage = ["/", "/menus", "/about", "/reservations"].includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,11 +47,12 @@ export function Navbar() {
                     <span
                         className={clsx(
                             "font-serif text-2xl tracking-widest uppercase transition-colors",
-                            isScrolled ? "text-secondary" : "text-primary md:text-white" // Text white on transparent info (assuming heavy hero image)
+                            isScrolled
+                                ? "text-secondary"
+                                : isHeroPage
+                                    ? "text-primary md:text-white"
+                                    : "text-primary"
                         )}
-                    // Note: If hero is light, we need text-primary consistently.
-                    // If hero has dark overlay, white text is good.
-                    // Let's assume Hero will have dark overlay.
                     >
                         Ajisai
                     </span>
@@ -57,7 +66,11 @@ export function Navbar() {
                             href={link.href}
                             className={clsx(
                                 "text-sm uppercase tracking-wider font-light hover:text-accent transition-colors",
-                                isScrolled ? "text-secondary" : "text-white"
+                                isScrolled
+                                    ? "text-secondary"
+                                    : isHeroPage
+                                        ? "text-white"
+                                        : "text-primary"
                             )}
                         >
                             {link.name}
@@ -69,7 +82,9 @@ export function Navbar() {
                             "px-6 py-2 border transition-all duration-300",
                             isScrolled
                                 ? "border-secondary text-secondary hover:bg-secondary hover:text-primary"
-                                : "border-white text-white hover:bg-white hover:text-primary"
+                                : isHeroPage
+                                    ? "border-white text-white hover:bg-white hover:text-primary"
+                                    : "border-primary text-primary hover:bg-primary hover:text-secondary"
                         )}
                     >
                         Reserve
@@ -78,11 +93,24 @@ export function Navbar() {
 
                 {/* Mobile Toggle */}
                 <button
-                    className="md:hidden z-10 text-secondary"
+                    className="md:hidden z-10"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     aria-label="Toggle Menu"
                 >
-                    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} className={isScrolled ? "text-secondary" : "text-primary"} />}
+                    {isMobileMenuOpen ? (
+                        <X size={28} className="text-secondary" />
+                    ) : (
+                        <Menu
+                            size={28}
+                            className={clsx(
+                                isScrolled
+                                    ? "text-secondary"
+                                    : isHeroPage
+                                        ? "text-white"
+                                        : "text-primary"
+                            )}
+                        />
+                    )}
                 </button>
 
                 {/* Mobile Menu Overlay */}

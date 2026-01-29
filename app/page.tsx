@@ -141,7 +141,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
                <Image 
-                src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&q=80&w=1000" 
+                src="/artisan-sushi .jpg" 
                 alt="Sushi Platter" 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -162,7 +162,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
                <Image 
-                src="/ramen-bowl.jpg"
+                src="/handcrafted-ramen.jpg"
                 alt="Ramen Bowl" 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -183,7 +183,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
                <Image 
-                src="https://images.unsplash.com/photo-1606416132922-22ab37c1231a?auto=format&fit=crop&q=80&w=1000" 
+                src="/wagyu-steak.jpg" 
                 alt="Wagyu Steak" 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

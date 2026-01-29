@@ -2,10 +2,59 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, ArrowUp, Star, Quote } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { ChevronRight, ArrowUp, Star, Quote, Sparkles } from "lucide-react";
+import { useEffect, useState, useRef, MouseEvent } from "react";
 
-// Placeholder Reviews Data
+// --- NEW COMPONENT: 3D TILT CARD ---
+// This makes the images feel "alive" by following the mouse
+const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const box = card.getBoundingClientRect();
+    const x = e.clientX - box.left;
+    const y = e.clientY - box.top;
+    const centerX = box.width / 2;
+    const centerY = box.height / 2;
+    
+    // Calculate rotation (max 10 degrees)
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    
+    setRotate({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 }); // Reset position
+  };
+
+  return (
+    <div 
+      className="relative h-[400px] w-full group perspective-1000 overflow-hidden rounded-sm shadow-2xl"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: "1000px" }}
+    >
+      <div 
+        className="w-full h-full transition-transform duration-200 ease-out"
+        style={{ 
+          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(1.05)`,
+        }}
+      >
+        <Image 
+          src={src} 
+          alt={alt} 
+          fill 
+          className="object-cover"
+        />
+        {/* Shine Effect Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      </div>
+    </div>
+  );
+};
+
 const REVIEWS = [
   {
     id: 1,
@@ -31,7 +80,6 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // 1. Handle Video Speed & Scroll Listener
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.6;
@@ -49,12 +97,8 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 2. Scroll to Top Function
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -72,8 +116,7 @@ export default function Home() {
         <ArrowUp className="w-6 h-6" />
       </button>
 
-
-      {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
+      {/* 1. HERO SECTION */}
       <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/50 z-10" />
@@ -118,7 +161,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. ZIG-ZAG FEATURE SECTION WITH PATTERN BACKGROUND */}
+      {/* 2. ZIG-ZAG FEATURE SECTION WITH 3D TILT */}
       <section 
         className="w-full bg-[#F9F4E8] py-24 bg-repeat bg-[length:400px_400px]"
         style={{ backgroundImage: 'url("/pattern-bg.png")' }}
@@ -132,6 +175,10 @@ export default function Home() {
           {/* Feature 1: Sushi */}
           <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                 <Sparkles className="text-[#C5A059] w-5 h-5" />
+                 <span className="text-xs tracking-widest uppercase text-[#C5A059] font-bold">Chef's Selection</span>
+              </div>
               <h3 className="text-3xl font-serif text-[#5D182E]">Artisan Sushi</h3>
               <p className="text-gray-800 leading-loose">
                 Our sushi is a testament to purity and precision. We source our fish daily from sustainable markets, ensuring that every piece of Nigiri and every roll captures the essence of the ocean.
@@ -140,13 +187,12 @@ export default function Home() {
                 View Sushi Menu <ChevronRight className="w-4 h-4 ml-2" />
               </Link>
             </div>
-            <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
-               <Image 
-                src="/artisan-sushi .jpg" 
-                alt="Sushi Platter" 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+            {/* 3D TILT CARD IMPLEMENTATION */}
+            <div className="md:w-1/2 w-full">
+               <TiltCard 
+                 src="/artisan-sushi .jpg" 
+                 alt="Sushi Platter" 
+               />
             </div>
           </div>
 
@@ -161,13 +207,12 @@ export default function Home() {
                 View Ramen Menu <ChevronRight className="w-4 h-4 ml-2" />
               </Link>
             </div>
-            <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
-               <Image 
-                src="/handcrafted-ramen.jpg"
-                alt="Ramen Bowl" 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+            {/* 3D TILT CARD IMPLEMENTATION */}
+            <div className="md:w-1/2 w-full">
+               <TiltCard 
+                 src="/handcrafted-ramen.jpg" 
+                 alt="Ramen Bowl" 
+               />
             </div>
           </div>
 
@@ -182,13 +227,13 @@ export default function Home() {
                 View Entrees <ChevronRight className="w-4 h-4 ml-2" />
               </Link>
             </div>
-            <div className="md:w-1/2 relative h-[400px] w-full group overflow-hidden">
-               <Image 
-                src="/wagyu-steak.jpg" 
-                alt="Wagyu Steak" 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+            {/* 3D TILT CARD IMPLEMENTATION */}
+            <div className="md:w-1/2 w-full">
+               <TiltCard 
+                 src="/wagyu-steak.jpg
+" 
+                 alt="Wagyu Steak" 
+               />
             </div>
           </div>
         </div>

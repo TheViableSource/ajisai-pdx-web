@@ -10,7 +10,7 @@ export function Hero() {
             {/* Background Image with Parallax Effect (simulated via fixed or scroll) - Simplified for performance */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="https://images.unsplash.com/photo-1580442151529-343f2f5e0e31?auto=format&fit=crop&q=80&w=2000"
+                    src="/hero-sushi.jpg"
                     alt="Dark moody sushi bar ambiance"
                     fill
                     className="object-cover"

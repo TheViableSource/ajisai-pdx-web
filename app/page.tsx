@@ -17,7 +17,8 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="https://videos.pexels.com/video-files/5956797/5956797-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            {/* CHANGED: Pointing to the local file in the public folder */}
+            <source src="/hero-sushi.mp4" type="video/mp4" />
           </video>
         </div>
 

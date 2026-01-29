@@ -1,8 +1,18 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.6; // 60% speed
+    }
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
@@ -11,20 +21,22 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/50 z-10" /> {/* Overlay for text readability */}
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover"
           >
-            {/* CHANGED: Pointing to the local file in the public folder */}
+            {/* Ensure hero-sushi.mp4 is in your public folder */}
             <source src="/hero-sushi.mp4" type="video/mp4" />
           </video>
         </div>
 
         {/* Hero Content */}
         <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-          <h2 className="text-ajisai-gold tracking-[0.2em] uppercase text-sm md:text-base mb-4 animate-fade-in-up">
+          {/* CHANGED: text-white instead of text-ajisai-gold */}
+          <h2 className="text-white tracking-[0.2em] uppercase text-sm md:text-base mb-4 animate-fade-in-up">
             Welcome to Ajisai
           </h2>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 tracking-tight leading-tight">
@@ -35,15 +47,17 @@ export default function Home() {
             Experience authentic sushi, premium steak, and handcrafted ramen in the heart of Portland's Pearl District.
           </p>
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+            {/* CHANGED: hover:text-black */}
             <Link 
               href="/reservations" 
-              className="bg-ajisai-wine text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-ajisai-wine transition-all duration-300 min-w-[200px]"
+              className="bg-ajisai-wine text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300 min-w-[200px]"
             >
               Book a Table
             </Link>
+            {/* CHANGED: hover:text-black */}
             <Link 
               href="/menus" 
-              className="border border-white text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-ajisai-wine transition-all duration-300 min-w-[200px]"
+              className="border border-white text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300 min-w-[200px]"
             >
               View Menus
             </Link>
@@ -51,7 +65,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. ZIG-ZAG "MAGAZINE" FEATURE SECTION (Tanaka Style) */}
+      {/* 2. ZIG-ZAG "MAGAZINE" FEATURE SECTION */}
       <section className="w-full bg-ajisai-cream py-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
@@ -59,7 +73,7 @@ export default function Home() {
             <div className="w-24 h-1 bg-ajisai-gold mx-auto" />
           </div>
 
-          {/* Feature 1: Sushi (Text Left, Image Right) */}
+          {/* Feature 1: Sushi */}
           <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <h3 className="text-3xl font-serif text-ajisai-wine">Artisan Sushi</h3>
@@ -80,7 +94,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Feature 2: Ramen (Image Left, Text Right) */}
+          {/* Feature 2: Ramen */}
           <div className="flex flex-col md:flex-row-reverse items-center gap-12 mb-24">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <h3 className="text-3xl font-serif text-ajisai-wine">Handcrafted Ramen</h3>
@@ -101,7 +115,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Feature 3: Steak (Text Left, Image Right) */}
+          {/* Feature 3: Steak */}
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <h3 className="text-3xl font-serif text-ajisai-wine">Premium Steak & Bowls</h3>

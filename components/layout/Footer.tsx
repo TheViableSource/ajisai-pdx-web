@@ -14,14 +14,14 @@ export function Footer() {
                         <div className="flex items-start gap-3 opacity-90">
                             <MapPin className="w-5 h-5 mt-1 shrink-0 text-accent" />
                             <p>
-                                123 Pearl District
+                                4050 SW 114th Ave
                                 <br />
-                                Portland, OR 97209
+                                Beaverton, OR 97005
                             </p>
                         </div>
                         <div className="flex items-center gap-3 opacity-90">
                             <Phone className="w-5 h-5 text-accent" />
-                            <p>(503) 555-0123</p>
+                            <p>(971) 727-3180</p>
                         </div>
                         <div className="flex items-center gap-3 opacity-90">
                             <Mail className="w-5 h-5 text-accent" />
@@ -35,8 +35,7 @@ export function Footer() {
                         <div className="flex items-start gap-3 opacity-90">
                             <Clock className="w-5 h-5 mt-1 text-accent" />
                             <div>
-                                <p className="font-semibold">Monday - Sunday</p>
-                                <p>11:00 AM – 11:00 PM</p>
+                                <p className="font-semibold">Daily: 11:00 AM – 10:00 PM</p>
                             </div>
                         </div>
                         <div className="pt-4">

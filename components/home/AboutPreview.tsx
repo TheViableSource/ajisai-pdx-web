@@ -38,7 +38,7 @@ export function AboutPreview() {
                             Intimate Ambiance <br /> for Every Occasion
                         </h2>
                         <p className="text-lg opacity-80 mb-8 font-light leading-relaxed">
-                            Located in the heart of the Pearl District, Ajisai offers a sanctuary from the bustling city. Our interior reflects the calm and beauty of the Hydrangea (Ajisai), providing a warm, welcoming atmosphere perfect for romantic dinners, business meetings, or family celebrations.
+                            Located in the heart of Beaverton, Ajisai offers a sanctuary from the bustling city. Our interior reflects the calm and beauty of the Hydrangea (Ajisai), providing a warm, welcoming atmosphere perfect for romantic dinners, business meetings, or family celebrations.
                         </p>
                         <Link
                             href="/about"

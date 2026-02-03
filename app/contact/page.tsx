@@ -4,7 +4,7 @@ import { Mail, MapPin, Phone, Clock } from "lucide-react";
 export const metadata: Metadata = {
     title: "Visit Us | Ajisai Restaurant Portland, OR",
     description:
-        "Contact information, location, and hours for Ajisai Restaurant in Portland's Pearl District.",
+        "Contact information, location, and hours for Ajisai Restaurant in Beaverton, OR.",
 };
 
 export default function ContactPage() {
@@ -22,9 +22,8 @@ export default function ContactPage() {
                                 <h2 className="text-2xl font-serif">Location</h2>
                             </div>
                             <p className="pl-9 text-lg opacity-80 leading-relaxed">
-                                123 Pearl District<br />
-                                Portland, OR 97209<br />
-                                <span className="text-sm opacity-60">(Corner of 10th & Glisan)</span>
+                                4050 SW 114th Ave<br />
+                                Beaverton, OR 97005<br />
                             </p>
                         </div>
 
@@ -34,7 +33,7 @@ export default function ContactPage() {
                                 <h2 className="text-2xl font-serif">Contact</h2>
                             </div>
                             <p className="pl-9 text-lg opacity-80 leading-relaxed">
-                                (503) 555-0123<br />
+                                (971) 727-3180<br />
                                 <span className="text-sm">reservations@ajisai-portland.com</span>
                             </p>
                         </div>
@@ -45,17 +44,8 @@ export default function ContactPage() {
                                 <h2 className="text-2xl font-serif">Hours</h2>
                             </div>
                             <div className="pl-9 text-lg opacity-80 leading-relaxed">
-                                <div className="flex justify-between max-w-[200px] mb-2">
-                                    <span>Mon - Thu</span>
-                                    <span>11:00 - 10:00</span>
-                                </div>
-                                <div className="flex justify-between max-w-[200px] mb-2 font-semibold text-primary">
-                                    <span>Fri - Sat</span>
-                                    <span>11:00 - 11:00</span>
-                                </div>
-                                <div className="flex justify-between max-w-[200px]">
-                                    <span>Sunday</span>
-                                    <span>11:00 - 10:00</span>
+                                <div className="font-semibold text-primary">
+                                    <span>Daily: 11:00 AM - 10:00 PM</span>
                                 </div>
                             </div>
                         </div>
@@ -70,8 +60,8 @@ export default function ContactPage() {
                             scrolling="no"
                             marginHeight={0}
                             marginWidth={0}
-                            src="https://maps.google.com/maps?q=Portland%2C%20OR%20Pearl%20District&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                            aria-label="Google Map of Portland, OR"
+                            src="https://maps.google.com/maps?q=4050%20SW%20114th%20Ave%2C%20Beaverton%2C%20OR&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            aria-label="Google Map of Ajisai Restaurant"
                         ></iframe>
                     </div>
                 </div>

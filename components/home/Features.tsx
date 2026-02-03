@@ -54,7 +54,7 @@ export function Features() {
                 >
                     <h2 className="text-4xl md:text-5xl font-serif mb-6">Our Culinary Craft</h2>
                     <p className="max-w-2xl mx-auto text-lg opacity-80 font-light">
-                        We bring the authentic taste of Japan to Portland, combining traditional techniques with contemporary elegance.
+                        We bring the authentic taste of Japan to Beaverton, combining traditional techniques with contemporary elegance.
                     </p>
                 </motion.div>
 

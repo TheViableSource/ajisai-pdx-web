@@ -9,7 +9,7 @@ import { useEffect, useState, useRef, MouseEvent } from "react";
 // This makes the images feel "alive" by following the mouse
 const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  
+
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const box = card.getBoundingClientRect();
@@ -17,11 +17,11 @@ const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
     const y = e.clientY - box.top;
     const centerX = box.width / 2;
     const centerY = box.height / 2;
-    
+
     // Calculate rotation (max 10 degrees)
     const rotateX = (y - centerY) / 20;
     const rotateY = (centerX - x) / 20;
-    
+
     setRotate({ x: rotateX, y: rotateY });
   };
 
@@ -30,22 +30,22 @@ const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
   };
 
   return (
-    <div 
+    <div
       className="relative h-[400px] w-full group perspective-1000 overflow-hidden rounded-sm shadow-2xl"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: "1000px" }}
     >
-      <div 
+      <div
         className="w-full h-full transition-transform duration-200 ease-out"
-        style={{ 
+        style={{
           transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(1.05)`,
         }}
       >
-        <Image 
-          src={src} 
-          alt={alt} 
-          fill 
+        <Image
+          src={src}
+          alt={alt}
+          fill
           className="object-cover"
         />
         {/* Shine Effect Overlay */}
@@ -58,7 +58,7 @@ const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
 const REVIEWS = [
   {
     id: 1,
-    text: "An absolute gem in the Pearl District. The Omakase experience was akin to dining in Tokyo. The attention to detail is unmatched.",
+    text: "An absolute gem in Beaverton. The Omakase experience was akin to dining in Tokyo. The attention to detail is unmatched.",
     author: "Sarah J.",
     source: "OpenTable Diner"
   },
@@ -103,16 +103,14 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative">
-      
+
       {/* --- SCROLL TO TOP BUTTON --- */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-50 bg-[#C5A059] text-white p-4 rounded-full shadow-2xl transition-all duration-500 ease-in-out transform hover:scale-110 hover:bg-[#5D182E] group ${
-          showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
-        }`}
+        className={`fixed bottom-8 right-8 z-50 bg-primary text-secondary p-3 rounded-full shadow-2xl transition-all duration-500 ease-in-out transform hover:scale-110 hover:bg-accent hover:text-primary group ${showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+          }`}
         aria-label="Scroll to top"
       >
-        <span className="absolute -inset-1 rounded-full border border-[#C5A059] opacity-0 group-hover:opacity-100 group-hover:animate-ping"></span>
         <ArrowUp className="w-6 h-6" />
       </button>
 
@@ -141,18 +139,18 @@ export default function Home() {
             <span className="italic text-[#C5A059]">Japanese Dining</span>
           </h1>
           <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-            Experience authentic sushi, premium steak, and handcrafted ramen in the heart of Portland's Pearl District.
+            Experience authentic sushi, premium steak, and handcrafted ramen located across the street from Beaverton Town Square.
           </p>
-          
+
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <Link 
-              href="/reservations" 
+            <Link
+              href="/reservations"
               className="bg-[#5D182E] text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm transition-all duration-300 min-w-[200px] border border-[#5D182E] hover:bg-white hover:text-[#5D182E]"
             >
               Book a Table
             </Link>
-            <Link 
-              href="/menus" 
+            <Link
+              href="/menus"
               className="border border-white text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm transition-all duration-300 min-w-[200px] hover:bg-white hover:text-[#5D182E]"
             >
               View Menus
@@ -162,7 +160,7 @@ export default function Home() {
       </section>
 
       {/* 2. ZIG-ZAG FEATURE SECTION WITH 3D TILT */}
-      <section 
+      <section
         className="w-full bg-[#F9F4E8] py-24 bg-repeat bg-[length:400px_400px]"
         style={{ backgroundImage: 'url("/pattern-bg.png")' }}
       >
@@ -176,8 +174,8 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
               <div className="flex items-center justify-center md:justify-start gap-3">
-                 <Sparkles className="text-[#C5A059] w-5 h-5" />
-                 <span className="text-xs tracking-widest uppercase text-[#C5A059] font-bold">Chef's Selection</span>
+                <Sparkles className="text-[#C5A059] w-5 h-5" />
+                <span className="text-xs tracking-widest uppercase text-[#C5A059] font-bold">Chef's Selection</span>
               </div>
               <h3 className="text-3xl font-serif text-[#5D182E]">Artisan Sushi</h3>
               <p className="text-gray-800 leading-loose">
@@ -189,10 +187,10 @@ export default function Home() {
             </div>
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
-               <TiltCard 
-                 src="/artisan-sushi .jpg" 
-                 alt="Sushi Platter" 
-               />
+              <TiltCard
+                src="/artisan-sushi .jpg"
+                alt="Sushi Platter"
+              />
             </div>
           </div>
 
@@ -209,10 +207,10 @@ export default function Home() {
             </div>
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
-               <TiltCard 
-                 src="/handcrafted-ramen.jpg" 
-                 alt="Ramen Bowl" 
-               />
+              <TiltCard
+                src="/handcrafted-ramen.jpg"
+                alt="Ramen Bowl"
+              />
             </div>
           </div>
 
@@ -229,10 +227,10 @@ export default function Home() {
             </div>
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
-               <TiltCard 
-                 src="/wagyu-steak.jpg" 
-                 alt="Wagyu Steak" 
-               />
+              <TiltCard
+                src="/wagyu-steak.jpg"
+                alt="Wagyu Steak"
+              />
             </div>
           </div>
         </div>
@@ -241,46 +239,46 @@ export default function Home() {
       {/* 3. REVIEWS SECTION */}
       <section className="w-full bg-white py-24">
         <div className="container mx-auto px-6">
-           <div className="text-center mb-16">
-             <h2 className="text-[#5D182E] text-3xl md:text-4xl font-serif mb-4">Guest Experiences</h2>
-             <div className="flex justify-center gap-1 text-[#C5A059]">
-               <Star fill="#C5A059" size={20} />
-               <Star fill="#C5A059" size={20} />
-               <Star fill="#C5A059" size={20} />
-               <Star fill="#C5A059" size={20} />
-               <Star fill="#C5A059" size={20} />
-             </div>
-           </div>
+          <div className="text-center mb-16">
+            <h2 className="text-[#5D182E] text-3xl md:text-4xl font-serif mb-4">Guest Experiences</h2>
+            <div className="flex justify-center gap-1 text-[#C5A059]">
+              <Star fill="#C5A059" size={20} />
+              <Star fill="#C5A059" size={20} />
+              <Star fill="#C5A059" size={20} />
+              <Star fill="#C5A059" size={20} />
+              <Star fill="#C5A059" size={20} />
+            </div>
+          </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-             {REVIEWS.map((review) => (
-               <div key={review.id} className="bg-[#F9F4E8] p-8 relative rounded-sm shadow-sm hover:shadow-md transition-shadow">
-                 <Quote className="text-[#C5A059] opacity-30 w-10 h-10 mb-4" />
-                 <p className="text-gray-700 font-light italic mb-6 leading-relaxed">
-                   "{review.text}"
-                 </p>
-                 <div className="border-t border-[#5D182E]/10 pt-4">
-                   <p className="text-[#5D182E] font-serif font-medium">{review.author}</p>
-                   <p className="text-xs text-[#C5A059] uppercase tracking-widest mt-1">{review.source}</p>
-                 </div>
-               </div>
-             ))}
-           </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {REVIEWS.map((review) => (
+              <div key={review.id} className="bg-[#F9F4E8] p-8 relative rounded-sm shadow-sm hover:shadow-md transition-shadow">
+                <Quote className="text-[#C5A059] opacity-30 w-10 h-10 mb-4" />
+                <p className="text-gray-700 font-light italic mb-6 leading-relaxed">
+                  "{review.text}"
+                </p>
+                <div className="border-t border-[#5D182E]/10 pt-4">
+                  <p className="text-[#5D182E] font-serif font-medium">{review.author}</p>
+                  <p className="text-xs text-[#C5A059] uppercase tracking-widest mt-1">{review.source}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* 4. AMBIANCE BANNER */}
-      <section className="relative w-full h-[60vh] flex items-center justify-center bg-fixed bg-center bg-cover" 
-        style={{backgroundImage: 'url("/sushi-restaurant.jpg")'}}>
+      <section className="relative w-full h-[60vh] flex items-center justify-center bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: 'url("/sushi-restaurant.jpg")' }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 text-center max-w-2xl px-6">
-           <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">A Sanctuary in the City</h2>
-           <p className="text-gray-300 text-lg mb-8">
-             Located in the Pearl District, our space reflects the timeless beauty of the Hydrangea (Ajisai). 
-           </p>
-           <Link href="/about" className="text-white border-b border-[#C5A059] pb-1 hover:text-[#C5A059] transition-colors">
-             Read Our Story
-           </Link>
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">A Sanctuary in the City</h2>
+          <p className="text-gray-300 text-lg mb-8">
+            Located across the street from Beaverton Town Square, our space reflects the timeless beauty of the Hydrangea (Ajisai).
+          </p>
+          <Link href="/about" className="text-white border-b border-[#C5A059] pb-1 hover:text-[#C5A059] transition-colors">
+            Read Our Story
+          </Link>
         </div>
       </section>
     </main>

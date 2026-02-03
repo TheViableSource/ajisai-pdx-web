@@ -27,7 +27,7 @@ export default function AboutPage() {
                 <div className="prose prose-lg prose-headings:font-serif prose-headings:text-primary text-primary/80 mx-auto">
                     <h2 className="text-3xl text-center mb-8">Japanese Tradition, Portland Spirit</h2>
                     <p className="mb-6 leading-relaxed">
-                        Welcome to <strong>Ajisai</strong> (Hydrangea), a sanctuary of Japanese culinary art nestled in the vibrant heart of Portland's Pearl District. Just as the hydrangea flower blooms with grace and vibrance, we strive to bring beauty and life to every plate we serve.
+                        Welcome to <strong>Ajisai</strong> (Hydrangea), a sanctuary of Japanese culinary art nestled in Beaverton, located just across the street from Beaverton Town Square. Just as the hydrangea flower blooms with grace and vibrance, we strive to bring beauty and life to every plate we serve.
                     </p>
                     <p className="mb-6 leading-relaxed">
                         Our journey began with a simple philosophy: to honor the centuries-old traditions of Sushi and Kaiseki while embracing the bountiful fresh ingredients of the Pacific Northwest. Our chefs are masters of their craft, expertly balancing flavors, textures, and aesthetics to create an unforgettable dining experience.
@@ -35,7 +35,7 @@ export default function AboutPage() {
 
                     <div className="my-12 relative h-[400px] w-full rounded-sm overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1580442151529-343f2f5e0e31?auto=format&fit=crop&q=80&w=2000"
+                            src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&q=80&w=2000"
                             alt="Chef at work"
                             fill
                             className="object-cover"

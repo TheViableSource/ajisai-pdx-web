@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ajisai | Premier Sushi & Steakhouse in Portland, OR",
+  title: "Ajisai | Premier Sushi & Steakhouse in Beaverton, OR",
   description:
-    "Experience authentic Japanese fine dining in Portland. Serving exquisite Sushi, Premium Steak, and handcrafted Ramen in an elegant atmosphere. Reserve your table today.",
+    "Experience authentic Japanese fine dining in Beaverton. Serving exquisite Sushi, Premium Steak, and handcrafted Ramen in an elegant atmosphere. Reserve your table today.",
 };
 
 const jsonLd = {
@@ -26,13 +26,13 @@ const jsonLd = {
   name: "Ajisai",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "123 Pearl District",
-    addressLocality: "Portland",
+    streetAddress: "4050 SW 114th Ave",
+    addressLocality: "Beaverton",
     addressRegion: "OR",
-    postalCode: "97209",
+    postalCode: "97005",
     addressCountry: "US",
   },
-  telephone: "(503) 555-0123",
+  telephone: "(971) 727-3180",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -46,7 +46,7 @@ const jsonLd = {
         "Sunday",
       ],
       opens: "11:00",
-      closes: "23:00",
+      closes: "22:00",
     },
   ],
   servesCuisine: ["Sushi", "Japanese", "Fusion", "Ramen", "Steak"],

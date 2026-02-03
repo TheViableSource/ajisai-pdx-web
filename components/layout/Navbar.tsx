@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import clsx from "clsx";
@@ -10,7 +11,8 @@ const navLinks = [
     { name: "Home", href: "/" },
     { name: "Menus", href: "/menus" },
     { name: "About", href: "/about" },
-    { name: "Reservations", href: "/reservations" },
+    { name: "Reservations", href: "#" },
+    { name: "Order Online", href: "#" },
     { name: "Contact", href: "/contact" },
 ];
 
@@ -24,7 +26,8 @@ export function Navbar() {
     const pathname = usePathname();
 
     // Define pages that have a dark hero image at the top
-    const isHeroPage = ["/", "/menus", "/about", "/reservations"].includes(pathname);
+    // Define pages that have a dark hero image at the top
+    const isHeroPage = pathname === "/";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,20 +41,33 @@ export function Navbar() {
         <header
             className={clsx(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                isScrolled ? "bg-primary shadow-lg py-2" : "bg-transparent py-6"
+                isScrolled
+                    ? "bg-primary shadow-lg py-2"
+                    : isHeroPage
+                        ? "bg-transparent py-6"
+                        : "bg-primary shadow-lg py-6"
             )}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="relative z-10 group">
+                <Link href="/" className="relative z-10 group flex items-center gap-3">
+                    <div className={clsx(
+                        "relative transition-all duration-500 will-change-transform",
+                        isScrolled ? "w-0 h-0 opacity-0 -translate-x-4" : "w-32 h-32 opacity-100 translate-x-0"
+                    )}>
+                        <Image
+                            src="/logo-new.png"
+                            alt="Ajisai Logo"
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
                     <span
                         className={clsx(
-                            "font-serif text-2xl tracking-widest uppercase transition-colors",
+                            "font-serif text-2xl tracking-widest uppercase transition-all duration-500 whitespace-nowrap",
                             isScrolled
-                                ? "text-secondary"
-                                : isHeroPage
-                                    ? "text-primary md:text-white"
-                                    : "text-primary"
+                                ? "text-secondary opacity-100 translate-x-0"
+                                : "text-primary md:text-white opacity-0 -translate-x-4 w-0 overflow-hidden"
                         )}
                     >
                         Ajisai
@@ -66,25 +82,21 @@ export function Navbar() {
                             href={link.href}
                             className={clsx(
                                 "text-sm uppercase tracking-wider font-light hover:text-accent transition-colors",
-                                isScrolled
+                                isScrolled || !isHeroPage
                                     ? "text-secondary"
-                                    : isHeroPage
-                                        ? "text-white"
-                                        : "text-primary"
+                                    : "text-white"
                             )}
                         >
                             {link.name}
                         </Link>
                     ))}
                     <Link
-                        href="/reservations"
+                        href="#"
                         className={clsx(
                             "px-6 py-2 border transition-all duration-300",
-                            isScrolled
+                            isScrolled || !isHeroPage
                                 ? "border-secondary text-secondary hover:bg-secondary hover:text-primary"
-                                : isHeroPage
-                                    ? "border-white text-white hover:bg-white hover:text-primary"
-                                    : "border-primary text-primary hover:bg-primary hover:text-secondary"
+                                : "border-white text-white hover:bg-white hover:text-primary"
                         )}
                     >
                         Reserve
@@ -103,11 +115,9 @@ export function Navbar() {
                         <Menu
                             size={28}
                             className={clsx(
-                                isScrolled
+                                isScrolled || !isHeroPage
                                     ? "text-secondary"
-                                    : isHeroPage
-                                        ? "text-white"
-                                        : "text-primary"
+                                    : "text-white"
                             )}
                         />
                     )}
@@ -133,7 +143,7 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <Link
-                                href="/reservations"
+                                href="#"
                                 className="mt-4 px-8 py-3 border border-secondary text-secondary hover:bg-accent hover:border-accent hover:text-primary transition-all text-xl"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >

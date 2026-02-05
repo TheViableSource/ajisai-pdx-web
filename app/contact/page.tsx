@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
     return (
         <div className="bg-secondary min-h-screen text-primary pb-20">
-            <div className="container mx-auto px-6 py-20 pt-32">
+            <div className="container mx-auto px-6 py-20 pt-48">
                 <h1 className="text-4xl md:text-5xl font-serif text-center mb-16 uppercase tracking-widest">Contact & Location</h1>
 
                 <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
@@ -33,8 +33,7 @@ export default function ContactPage() {
                                 <h2 className="text-2xl font-serif">Contact</h2>
                             </div>
                             <p className="pl-9 text-lg opacity-80 leading-relaxed">
-                                (971) 727-3180<br />
-                                <span className="text-sm">reservations@ajisai-portland.com</span>
+                                (971) 727-3180
                             </p>
                         </div>
 

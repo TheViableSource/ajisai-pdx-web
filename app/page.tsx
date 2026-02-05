@@ -37,7 +37,7 @@ const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
       style={{ perspective: "1000px" }}
     >
       <div
-        className="w-full h-full transition-transform duration-200 ease-out"
+        className="relative w-full h-full transition-transform duration-200 ease-out"
         style={{
           transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale(1.05)`,
         }}
@@ -46,6 +46,7 @@ const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
           src={src}
           alt={alt}
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
         />
         {/* Shine Effect Overlay */}
@@ -139,7 +140,7 @@ export default function Home() {
             <span className="italic text-[#C5A059]">Japanese Dining</span>
           </h1>
           <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-            Experience authentic sushi, premium steak, and handcrafted ramen located across the street from Beaverton Town Square.
+            Experience authentic sushi, interactive teppanyaki, and handcrafted ramen located across the street from Beaverton Town Square.
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
@@ -188,7 +189,7 @@ export default function Home() {
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
               <TiltCard
-                src="/artisan-sushi .jpg"
+                src="/artisan-sushi.jpg"
                 alt="Sushi Platter"
               />
             </div>
@@ -236,7 +237,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. REVIEWS SECTION */}
+      {/* 3. TEPPANYAKI SECTION */}
+      <section className="w-full bg-[#111] text-white py-24 overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+
+            {/* Text Content */}
+            <div className="w-full lg:w-1/2 space-y-8 order-2 lg:order-1">
+              <div className="space-y-4">
+                <span className="text-[#C5A059] tracking-[0.2em] text-sm font-bold uppercase">Dinner & A Show</span>
+                <h2 className="text-4xl md:text-5xl font-serif leading-tight">
+                  <span className="text-[#C5A059]">Teppanyaki</span> Experience
+                </h2>
+              </div>
+
+              <p className="text-gray-300 leading-loose text-lg font-light">
+                Prepare for an unforgettable evening where culinary mastery meets theatrical performance.
+                Our skilled chefs dazzle with a fiery display of knife skills and showmanship, grilling premium
+                steaks, seafood, and fresh vegetables right before your eyes.
+              </p>
+
+              <ul className="space-y-4 text-gray-400">
+                <li className="flex items-start gap-3">
+                  <Sparkles className="w-5 h-5 text-[#C5A059] mt-1 shrink-0" />
+                  <span>Interactive dining perfect for celebrations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Sparkles className="w-5 h-5 text-[#C5A059] mt-1 shrink-0" />
+                  <span>Premium Wagyu and Lobster options available</span>
+                </li>
+              </ul>
+
+              <div className="pt-4">
+                <Link
+                  href="/reservations"
+                  className="bg-[#C5A059] text-[#111] px-8 py-4 rounded-sm uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors duration-300 inline-block"
+                >
+                  Reserve Your Seat
+                </Link>
+              </div>
+            </div>
+
+            {/* Video Placeholder */}
+            <div className="w-full lg:w-1/2 order-1 lg:order-2">
+              <div className="relative aspect-video w-full bg-black/50 border border-[#333] rounded-sm overflow-hidden group">
+                {/* Placeholder Content */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-[url('https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center">
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500" />
+                  <div className="relative z-10">
+                    <div className="w-20 h-20 rounded-full border-2 border-[#C5A059] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
+                      <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-[#C5A059] border-b-[10px] border-b-transparent ml-1" />
+                    </div>
+                    <h3 className="text-2xl font-serif text-white mb-2">The Fire Show</h3>
+                    <p className="text-[#C5A059] tracking-widest text-sm uppercase">Coming Soon</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. REVIEWS SECTION (renumbered) */}
       <section className="w-full bg-white py-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">

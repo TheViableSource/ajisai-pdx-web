@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ajisai | Premier Sushi & Steakhouse in Beaverton, OR",
+  title: "Ajisai | Premier Sushi, Teppanyaki & Steakhouse in Beaverton, OR",
   description:
-    "Experience authentic Japanese fine dining in Beaverton. Serving exquisite Sushi, Premium Steak, and handcrafted Ramen in an elegant atmosphere. Reserve your table today.",
+    "Experience authentic Japanese fine dining in Beaverton. Serving exquisite Sushi, interactive Teppanyaki, Premium Steak, and handcrafted Ramen in an elegant atmosphere. Reserve your table today.",
 };
 
 const jsonLd = {

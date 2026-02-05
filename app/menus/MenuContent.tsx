@@ -64,7 +64,7 @@ export default function MenuContent({ categories }: MenuContentProps) {
     return (
         <div className="bg-secondary min-h-screen text-primary pb-20">
             {/* Header */}
-            <div className="relative h-[40vh] bg-black">
+            <div className="relative h-[50vh] bg-black">
                 <Image
                     src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&q=80&w=2000"
                     alt="Japanese Cuisine"
@@ -102,7 +102,7 @@ export default function MenuContent({ categories }: MenuContentProps) {
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 py-16">
+            <div className="container mx-auto px-6 pt-32 pb-20">
                 {/* Sticky Navigation */}
                 <div className="sticky top-20 z-40 bg-secondary/95 backdrop-blur-sm border-b border-primary/10 mb-16 -mx-6 px-6">
                     <div className="flex flex-wrap justify-center gap-8 py-4 w-full">

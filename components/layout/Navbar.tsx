@@ -8,12 +8,11 @@ import { Menu, X } from "lucide-react";
 import clsx from "clsx";
 
 const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Menus", href: "/menus" },
     { name: "About", href: "/about" },
-    { name: "Reservations", href: "#" },
-    { name: "Order Online", href: "#" },
+    { name: "Menus", href: "/menus" },
+    { name: "Reservations", href: "/reservations" },
     { name: "Contact", href: "/contact" },
+    // { name: "Order Online", href: "#" }, // Hidden for now
 ];
 
 import { usePathname } from "next/navigation";
@@ -27,7 +26,8 @@ export function Navbar() {
 
     // Define pages that have a dark hero image at the top
     // Define pages that have a dark hero image at the top
-    const isHeroPage = pathname === "/";
+    // Define pages that have a dark hero image at the top
+    const isHeroPage = ["/", "/menus", "/about", "/jobs"].includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -59,6 +59,7 @@ export function Navbar() {
                             src="/logo-new.png"
                             alt="Ajisai Logo"
                             fill
+                            sizes="(max-width: 768px) 100vw, 20vw"
                             className="object-contain"
                         />
                     </div>
@@ -91,7 +92,7 @@ export function Navbar() {
                         </Link>
                     ))}
                     <Link
-                        href="#"
+                        href="/reservations"
                         className={clsx(
                             "px-6 py-2 border transition-all duration-300",
                             isScrolled || !isHeroPage
@@ -143,7 +144,7 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <Link
-                                href="#"
+                                href="/reservations"
                                 className="mt-4 px-8 py-3 border border-secondary text-secondary hover:bg-accent hover:border-accent hover:text-primary transition-all text-xl"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >

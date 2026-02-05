@@ -11,6 +11,9 @@ export function Footer() {
                         <Link href="/" className="text-3xl font-serif tracking-widest mb-2">
                             AJISAI
                         </Link>
+                        <p className="text-sm opacity-80 max-w-xs mb-4">
+                            Premier Japanese dining destination serving Sushi, Teppanyaki, and Ramen in Beaverton, Oregon.
+                        </p>
                         <div className="flex items-start gap-3 opacity-90">
                             <MapPin className="w-5 h-5 mt-1 shrink-0 text-accent" />
                             <p>
@@ -23,10 +26,7 @@ export function Footer() {
                             <Phone className="w-5 h-5 text-accent" />
                             <p>(971) 727-3180</p>
                         </div>
-                        <div className="flex items-center gap-3 opacity-90">
-                            <Mail className="w-5 h-5 text-accent" />
-                            <p>reservations@ajisai-portland.com</p>
-                        </div>
+
                     </div>
 
                     {/* Hours */}
@@ -80,6 +80,9 @@ export function Footer() {
                             </Link>
                             <Link href="/contact" className="hover:text-accent">
                                 Contact & Location
+                            </Link>
+                            <Link href="/jobs" className="hover:text-accent">
+                                Jobs
                             </Link>
                             <Link href="#" className="hover:text-accent">
                                 Privacy Policy

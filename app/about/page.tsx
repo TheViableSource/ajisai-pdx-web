@@ -11,7 +11,7 @@ export default function AboutPage() {
     return (
         <div className="bg-secondary min-h-screen text-primary pb-20">
             {/* Hero */}
-            <div className="relative h-[50vh]">
+            <div className="relative h-[60vh]">
                 <Image
                     src="https://images.unsplash.com/photo-1493236272120-200db0da1927?auto=format&fit=crop&q=80&w=2000"
                     alt="Rainy Portland Window Ambiance"
@@ -30,7 +30,7 @@ export default function AboutPage() {
                         Welcome to <strong>Ajisai</strong> (Hydrangea), a sanctuary of Japanese culinary art nestled in Beaverton, located just across the street from Beaverton Town Square. Just as the hydrangea flower blooms with grace and vibrance, we strive to bring beauty and life to every plate we serve.
                     </p>
                     <p className="mb-6 leading-relaxed">
-                        Our journey began with a simple philosophy: to honor the centuries-old traditions of Sushi and Kaiseki while embracing the bountiful fresh ingredients of the Pacific Northwest. Our chefs are masters of their craft, expertly balancing flavors, textures, and aesthetics to create an unforgettable dining experience.
+                        Our journey began with a simple philosophy: to honor the centuries-old traditions of Sushi, Teppanyaki, and Kaiseki while embracing the bountiful fresh ingredients of the Pacific Northwest. Our chefs are masters of their craft, expertly balancing flavors, textures, and aesthetics to create an unforgettable dining experience.
                     </p>
 
                     <div className="my-12 relative h-[400px] w-full rounded-sm overflow-hidden">

@@ -7,19 +7,18 @@ export default function ReservationsPage() {
     const widgetContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Clean up any existing widgets to prevent duplicates if user navigates back and forth
-        if (widgetContainerRef.current) {
-            widgetContainerRef.current.innerHTML = '';
-        }
+        if (!widgetContainerRef.current) return;
+
+        // Check if script already exists to prevent duplicates
+        if (widgetContainerRef.current.querySelector('script')) return;
 
         const script = document.createElement("script");
         script.src = "//www.opentable.com/widget/reservation/loader?rid=1459282&type=standard&theme=standard&color=1&dark=true&iframe=true&domain=com&lang=en-US&newtab=false&ot_source=Restaurant%20website&cfe=true";
         script.async = true;
+        widgetContainerRef.current.appendChild(script);
 
-        if (widgetContainerRef.current) {
-            widgetContainerRef.current.appendChild(script);
-        }
-
+        // Cleanup function not strictly needed if we check for existence, 
+        // but good practice to clear if unmounting
         return () => {
             if (widgetContainerRef.current) {
                 widgetContainerRef.current.innerHTML = '';
@@ -30,15 +29,16 @@ export default function ReservationsPage() {
     return (
         <div className="bg-secondary min-h-screen text-primary pb-20">
             {/* Hero Section */}
-            <div className="relative h-[60vh] min-h-[400px]">
+            <div className="relative h-[50vh] min-h-[400px] w-full">
                 <Image
-                    src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=2000"
+                    src="/reservations-hero.jpg"
                     alt="Elegant Dining Room"
                     fill
+                    style={{ objectFit: "cover" }}
                     className="object-cover"
                     priority
                 />
-                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                     <div className="text-center">
                         <h1 className="text-5xl md:text-6xl font-serif text-white tracking-widest uppercase mb-4">
                             Reservations
@@ -57,25 +57,19 @@ export default function ReservationsPage() {
                         please contact us directly at <a href="tel:9717273180" className="text-[#5D182E] font-semibold hover:underline">(971) 727-3180</a>.
                     </p>
 
-                    <div className="bg-white p-8 rounded-sm shadow-lg border border-[#5D182E]/10 min-h-[600px]">
+                    <div className="mb-16">
                         {/* OpenTable Widget Container */}
                         <div ref={widgetContainerRef} className="opentable-widget-container flex justify-center" />
                     </div>
 
-                    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                        <div className="bg-[#F9F4E8] p-6 rounded-sm">
-                            <h3 className="text-[#5D182E] font-serif text-xl mb-3">Dinner Service</h3>
-                            <p className="text-gray-600 text-sm">Sunday - Thursday: 4:30 PM - 9:30 PM</p>
-                            <p className="text-gray-600 text-sm">Friday - Saturday: 4:30 PM - 10:00 PM</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-center max-w-3xl mx-auto border-t border-[#5D182E]/10 pt-12">
+                        <div>
+                            <h3 className="text-[#5D182E] font-serif text-2xl mb-4">Hours of Operation</h3>
+                            <p className="text-gray-600 text-lg">Daily: 11:00 AM – 10:00 PM</p>
                         </div>
-                        <div className="bg-[#F9F4E8] p-6 rounded-sm">
-                            <h3 className="text-[#5D182E] font-serif text-xl mb-3">Lunch Service</h3>
-                            <p className="text-gray-600 text-sm">Monday - Friday: 11:30 AM - 2:30 PM</p>
-                            <p className="text-gray-600 text-sm">Saturday - Sunday: 12:00 PM - 3:00 PM</p>
-                        </div>
-                        <div className="bg-[#F9F4E8] p-6 rounded-sm">
-                            <h3 className="text-[#5D182E] font-serif text-xl mb-3">Teppanyaki Policy</h3>
-                            <p className="text-gray-600 text-sm">
+                        <div>
+                            <h3 className="text-[#5D182E] font-serif text-2xl mb-4">Teppanyaki Policy</h3>
+                            <p className="text-gray-600 text-lg">
                                 We recommend arriving 15 minutes prior to your reservation time.
                                 Teppanyaki shows start promptly.
                             </p>

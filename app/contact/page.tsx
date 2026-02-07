@@ -44,7 +44,7 @@ export default function ContactPage() {
                             </div>
                             <div className="pl-9 text-lg opacity-80 leading-relaxed">
                                 <div className="font-semibold text-primary">
-                                    <span>Daily: 11:00 AM - 10:00 PM</span>
+                                    <span>Daily: 11:00 AM – 10:00 PM</span>
                                 </div>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ export function Navbar() {
     // Define pages that have a dark hero image at the top
     // Define pages that have a dark hero image at the top
     // Define pages that have a dark hero image at the top
-    const isHeroPage = ["/", "/menus", "/about", "/jobs"].includes(pathname);
+    const isHeroPage = ["/", "/menus", "/about", "/jobs", "/reservations"].includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {

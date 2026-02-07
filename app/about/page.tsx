@@ -13,7 +13,7 @@ export default function AboutPage() {
             {/* Hero */}
             <div className="relative h-[60vh]">
                 <Image
-                    src="https://images.unsplash.com/photo-1493236272120-200db0da1927?auto=format&fit=crop&q=80&w=2000"
+                    src="/about-image.jpg"
                     alt="Rainy Portland Window Ambiance"
                     fill
                     className="object-cover"

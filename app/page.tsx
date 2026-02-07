@@ -127,14 +127,12 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/hero-sushi.mp4" type="video/mp4" />
+            <source src="/hero-video.mov" type="video/mp4" />
+            Your browser does not support the video tag.
           </video>
         </div>
 
         <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-          <h2 className="text-white tracking-[0.2em] uppercase text-sm md:text-base mb-4 animate-fade-in-up">
-            Welcome to Ajisai
-          </h2>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 tracking-tight leading-tight">
             The Art of <br />
             <span className="italic text-[#C5A059]">Japanese Dining</span>
@@ -282,7 +280,7 @@ export default function Home() {
             <div className="w-full lg:w-1/2 order-1 lg:order-2">
               <div className="relative aspect-video w-full bg-black/50 border border-[#333] rounded-sm overflow-hidden group">
                 {/* Placeholder Content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-[url('https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-[url('/teppan-show.jpg')] bg-cover bg-center">
                   <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500" />
                   <div className="relative z-10">
                     <div className="w-20 h-20 rounded-full border-2 border-[#C5A059] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
@@ -332,7 +330,7 @@ export default function Home() {
 
       {/* 4. AMBIANCE BANNER */}
       <section className="relative w-full h-[60vh] flex items-center justify-center bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: 'url("/sushi-restaurant.jpg")' }}>
+        style={{ backgroundImage: 'url("/sanctuary-bg.jpg")' }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 text-center max-w-2xl px-6">
           <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">A Sanctuary in the City</h2>

@@ -15,9 +15,50 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ajisai | Premier Sushi, Teppanyaki & Steakhouse in Beaverton, OR",
+  metadataBase: new URL("https://ajisai-portland.com"),
+  title: {
+    default: "Ajisai | Premier Sushi, Teppanyaki & Steakhouse in Beaverton, OR",
+    template: "%s | Ajisai Beaverton",
+  },
   description:
     "Experience authentic Japanese fine dining in Beaverton. Serving exquisite Sushi, interactive Teppanyaki, Premium Steak, and handcrafted Ramen in an elegant atmosphere. Reserve your table today.",
+  keywords: ["Sushi", "Teppanyaki", "Japanese Food", "Beaverton", "Portland", "Fine Dining", "Steakhouse", "Ramen"],
+  authors: [{ name: "Ajisai Restaurant" }],
+  creator: "Ajisai Restaurant",
+  publisher: "Ajisai Restaurant",
+  openGraph: {
+    title: "Ajisai | Premier Sushi, Teppanyaki & Steakhouse",
+    description: "Authentic Japanese fine dining featuring Sushi, Teppanyaki, and Ramen.",
+    url: "https://ajisai-portland.com",
+    siteName: "Ajisai",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/sanctuary-bg.jpg", // Using our new high-quality image
+        width: 1200,
+        height: 630,
+        alt: "Ajisai Restaurant Interior",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ajisai | Premier Sushi & Teppanyaki",
+    description: "Experience authentic Japanese fine dining in Beaverton.",
+    images: ["/sanctuary-bg.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 const jsonLd = {

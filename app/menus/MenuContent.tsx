@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { Share2, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,37 +19,23 @@ interface MenuCategory {
     items: MenuItem[];
 }
 
-interface MenuContentProps {
-    categories: MenuCategory[];
+interface MenuGroup {
+    id: string;
+    label: string;
+    subCategories: MenuCategory[];
 }
 
-export default function MenuContent({ categories }: MenuContentProps) {
-    const [activeSection, setActiveSection] = useState<string>(categories[0].id);
+interface MenuContentProps {
+    groups: MenuGroup[];
+}
+
+export default function MenuContent({ groups }: MenuContentProps) {
+    const [activeGroup, setActiveGroup] = useState<string>(groups[0].id);
+    const navRef = useRef<HTMLDivElement>(null);
     const [copied, setCopied] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + 200; // Offset for header
-
-            // Find the section currently in view
-            for (const category of categories) {
-                const element = document.getElementById(category.id);
-                if (element) {
-                    const { offsetTop, offsetHeight } = element;
-                    if (
-                        scrollPosition >= offsetTop &&
-                        scrollPosition < offsetTop + offsetHeight
-                    ) {
-                        setActiveSection(category.id);
-                        break;
-                    }
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [categories]);
+    // Get current group data
+    const currentGroup = groups.find(g => g.id === activeGroup) || groups[0];
 
     const handleShare = async () => {
         try {
@@ -102,47 +88,50 @@ export default function MenuContent({ categories }: MenuContentProps) {
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 pt-32 pb-20">
-                {/* Sticky Navigation */}
-                <div className="sticky top-20 z-40 bg-secondary/95 backdrop-blur-sm border-b border-primary/10 mb-16 -mx-6 px-6">
-                    <div className="flex flex-wrap justify-center gap-8 py-4 w-full">
-                        {categories.map((cat) => (
-                            <a
-                                key={cat.id}
-                                href={`#${cat.id}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const element = document.getElementById(cat.id);
-                                    if (element) {
-                                        window.scrollTo({
-                                            top: element.offsetTop - 140, // Adjust for sticky header
-                                            behavior: "smooth"
-                                        });
-                                        // Update active section immediately for better UX
-                                        setActiveSection(cat.id);
+            <div className="container mx-auto px-6 pt-16 pb-20">
+                {/* Visual Group Navigation */}
+                <div ref={navRef} className="sticky top-20 z-40 bg-secondary/95 backdrop-blur-sm border-b border-primary/10 mb-12 -mx-6 px-6">
+                    <div className="flex flex-nowrap overflow-x-auto gap-8 py-4 w-full no-scrollbar items-center justify-start md:justify-center">
+                        {groups.map((group) => (
+                            <button
+                                key={group.id}
+                                onClick={() => {
+                                    setActiveGroup(group.id);
+                                    if (navRef.current) {
+                                        const y = navRef.current.getBoundingClientRect().top + window.pageYOffset - 120;
+                                        window.scrollTo({ top: y, behavior: 'smooth' });
                                     }
                                 }}
-                                className={`text-sm md:text-base uppercase tracking-widest transition-colors font-serif relative pb-1 ${activeSection === cat.id ? "text-accent" : "text-primary/60 hover:text-primary"
+                                className={`text-sm md:text-base uppercase tracking-widest transition-colors font-serif relative pb-2 whitespace-nowrap flex-shrink-0 ${activeGroup === group.id ? "text-accent" : "text-primary/60 hover:text-primary"
                                     }`}
                             >
-                                {cat.title}
-                                {activeSection === cat.id && (
+                                {group.label}
+                                {activeGroup === group.id && (
                                     <motion.div
-                                        layoutId="activeSection"
+                                        layoutId="activeGroup"
                                         className="absolute left-0 right-0 bottom-0 h-0.5 bg-accent"
                                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}
-                            </a>
+                            </button>
                         ))}
                     </div>
                 </div>
 
-                {/* Menu Sections */}
-                <div className="max-w-4xl mx-auto space-y-20">
-                    {categories.map((cat) => (
-                        <MenuSection key={cat.id} category={cat} />
-                    ))}
+                {/* Sub-Category Content */}
+                <div className="max-w-4xl mx-auto min-h-[50vh]">
+                    <motion.div
+                        key={currentGroup.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-20"
+                    >
+                        {currentGroup.subCategories.map((cat) => (
+                            <MenuSection key={cat.id} category={cat} />
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </div>

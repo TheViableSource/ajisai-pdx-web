@@ -54,10 +54,11 @@ export default function JobsPage() {
             {/* Hero Section */}
             <div className="relative h-[50vh]">
                 <Image
-                    src="https://images.unsplash.com/photo-1554672408-730436b60dde?auto=format&fit=crop&q=80&w=2000"
-                    alt="Refined Japanese Cuisine Preparation"
+                    src="/jobs-hero.jpg"
+                    alt="Ajisai Team"
                     fill
                     className="object-cover"
+                    priority
                 />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                     <h1 className="text-5xl md:text-6xl font-serif text-white tracking-widest uppercase">Join Our Team</h1>

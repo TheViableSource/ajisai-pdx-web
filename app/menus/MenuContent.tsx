@@ -1,10 +1,16 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Share2, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MenuSection from "./MenuSection";
+
+const HERO_IMAGES = [
+    "/artisan-sushi-new.jpg",
+    "/handcrafted-ramen-new.jpg",
+    "/a5-wagyu.jpg"
+];
 
 interface MenuItem {
     name: string;
@@ -33,6 +39,14 @@ export default function MenuContent({ groups }: MenuContentProps) {
     const [activeGroup, setActiveGroup] = useState<string>(groups[0].id);
     const navRef = useRef<HTMLDivElement>(null);
     const [copied, setCopied] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
 
     // Get current group data
     const currentGroup = groups.find(g => g.id === activeGroup) || groups[0];
@@ -50,15 +64,27 @@ export default function MenuContent({ groups }: MenuContentProps) {
     return (
         <div className="bg-secondary min-h-screen text-primary pb-20">
             {/* Header */}
-            <div className="relative h-[50vh] bg-black">
-                <Image
-                    src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&q=80&w=2000"
-                    alt="Japanese Cuisine"
-                    fill
-                    className="object-cover opacity-60"
-                    priority
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="relative h-[50vh] bg-black overflow-hidden">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentImageIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.6 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        className="absolute inset-0"
+                    >
+                        <Image
+                            src={HERO_IMAGES[currentImageIndex]}
+                            alt="Japanese Cuisine"
+                            fill
+                            className={`object-cover ${currentImageIndex === 0 ? "object-bottom" : "object-center"}`}
+                            priority
+                        />
+                    </motion.div>
+                </AnimatePresence>
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
                     <div className="relative flex items-center gap-4">
                         <h1 className="text-5xl md:text-6xl font-serif text-white tracking-widest uppercase">
                             Menus

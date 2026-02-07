@@ -187,7 +187,7 @@ export default function Home() {
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
               <TiltCard
-                src="/artisan-sushi.jpg"
+                src="/artisan-sushi-new.jpg"
                 alt="Sushi Platter"
               />
             </div>
@@ -207,7 +207,7 @@ export default function Home() {
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
               <TiltCard
-                src="/handcrafted-ramen.jpg"
+                src="/handcrafted-ramen-new.jpg"
                 alt="Ramen Bowl"
               />
             </div>
@@ -216,9 +216,9 @@ export default function Home() {
           {/* Feature 3: Steak */}
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2 text-center md:text-left space-y-6">
-              <h3 className="text-3xl font-serif text-[#5D182E]">Premium Steak & Bowls</h3>
+              <h3 className="text-3xl font-serif text-[#5D182E]">A5 Wagyu Beef</h3>
               <p className="text-gray-800 leading-loose">
-                Experience the melt-in-your-mouth texture of premium American Wagyu. Grilled to perfection and served with our signature truffle soy reduction, it is a modern twist on classic Japanese teppan flavors.
+                Experience the melt-in-your-mouth texture of authentic Japanese A5 Wagyu. Grilled to perfection and served with our signature truffle soy reduction, it is a modern twist on classic Japanese teppan flavors.
               </p>
               <Link href="/menus#steak" className="inline-flex items-center text-[#5D182E] hover:text-[#C5A059] transition-colors uppercase tracking-widest text-sm font-semibold mt-4">
                 View Entrees <ChevronRight className="w-4 h-4 ml-2" />
@@ -227,8 +227,8 @@ export default function Home() {
             {/* 3D TILT CARD IMPLEMENTATION */}
             <div className="md:w-1/2 w-full">
               <TiltCard
-                src="/wagyu-steak.jpg"
-                alt="Wagyu Steak"
+                src="/a5-wagyu.jpg"
+                alt="A5 Wagyu Beef"
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const csvPath = path.join(process.cwd(), 'Ajisai_Menu_FULL.csv');
+const csvPath = path.join(process.cwd(), 'data', 'Ajisai_Menu_FULL.csv');
 const fileContent = fs.readFileSync(csvPath, 'utf8');
 
 const lines = fileContent.split('\n').filter(l => l.trim().length > 0);

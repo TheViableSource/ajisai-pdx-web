@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Facebook, Instagram, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { TikTokIcon } from "@/components/icons/TikTokIcon";
 
 export function Footer() {
     return (
@@ -70,6 +71,15 @@ export function Footer() {
                             >
                                 <Facebook className="w-6 h-6" />
                             </a>
+                            <a
+                                href="https://www.tiktok.com/@ajisaisushisteak?_r=1&_t=ZT-93jM01WJG6I"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-accent transition-colors"
+                                aria-label="TikTok"
+                            >
+                                <TikTokIcon className="w-6 h-6" />
+                            </a>
                         </div>
                         <nav className="flex flex-col gap-2 mt-4 text-center md:text-right text-sm opacity-80">
                             <Link href="/about" className="hover:text-accent">
@@ -98,3 +108,4 @@ export function Footer() {
         </footer>
     );
 }
+

@@ -53,7 +53,7 @@ export function Footer() {
                         <h3 className="text-xl font-serif text-accent mb-2">Connect</h3>
                         <div className="flex gap-6">
                             <a
-                                href="https://instagram.com"
+                                href="https://www.instagram.com/ajisaisushisteak?igsh=d3dwNmVnN2QwcHhi"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-accent transition-colors"
@@ -62,7 +62,7 @@ export function Footer() {
                                 <Instagram className="w-6 h-6" />
                             </a>
                             <a
-                                href="https://facebook.com"
+                                href="https://www.facebook.com/share/1KGp4GViZg/?mibextid=wwXIfr"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:text-accent transition-colors"

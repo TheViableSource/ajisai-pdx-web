@@ -103,7 +103,7 @@ export function Footer() {
                             <Link href="https://www.toasttab.com/ajisai-beaverton/rewardsLookup" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
                                 Check Rewards Points
                             </Link>
-                            <Link href="#" className="hover:text-accent">
+                            <Link href="/privacy" className="hover:text-accent">
                                 Privacy Policy
                             </Link>
                         </nav>

@@ -94,6 +94,15 @@ export function Footer() {
                             <Link href="/jobs" className="hover:text-accent">
                                 Jobs
                             </Link>
+                            <Link href="https://order.toasttab.com/egiftcards/ajisai-beaverton" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                                Gift Cards
+                            </Link>
+                            <Link href="https://www.toasttab.com/ajisai-beaverton/rewardsSignup" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                                Rewards
+                            </Link>
+                            <Link href="https://www.toasttab.com/ajisai-beaverton/rewardsLookup" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                                Check Rewards Points
+                            </Link>
                             <Link href="#" className="hover:text-accent">
                                 Privacy Policy
                             </Link>

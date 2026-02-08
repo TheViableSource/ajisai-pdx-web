@@ -784,6 +784,47 @@ const menuGroups = [
                 ]
             }
         ]
+    },
+    {
+        id: "kids-menu",
+        label: "Children's Menu",
+        subCategories: [
+            {
+                "id": "kids-entrees",
+                "title": "Children's Entrées",
+                "description": "For kids 10 and younger. Entrées served with miso soup or Ajisai house salad, shrimp appetizer, Vegetables (zucchini, onion), white rice, ice cream.",
+                "items": [
+                    { "name": "Chicken & Shrimp", "price": "27", "description": "" },
+                    { "name": "Chicken & Steak", "price": "28", "description": "" },
+                    { "name": "Steak & Shrimp", "price": "28", "description": "" },
+                    { "name": "Filet Mignon & Chicken", "price": "29", "description": "" },
+                    { "name": "Filet Mignon & Shrimp", "price": "30", "description": "" },
+                    { "name": "California Roll", "price": "18", "description": "Served with edamame, fresh fruit" },
+                    { "name": "Chicken Katsu", "price": "23", "description": "Served with French fries" },
+                    { "name": "Hibachi Chicken", "price": "23", "description": "" },
+                    { "name": "Hibachi Shrimp", "price": "23", "description": "" },
+                    { "name": "Hibachi Steak", "price": "25", "description": "" },
+                    { "name": "Hibachi Filet Mignon", "price": "28", "description": "" },
+                    { "name": "Yaki Udon or Yaki Soba", "price": "7", "description": "" },
+                    { "name": "Chicken Fried Rice", "price": "7", "description": "" },
+                    { "name": "French Fries", "price": "6", "description": "" }
+                ]
+            },
+            {
+                "id": "kids-drinks",
+                "title": "Kids Drinks",
+                "description": "Refreshing beverages.",
+                "items": [
+                    { "name": "Soda", "price": "4", "description": "Free Refills" },
+                    { "name": "Shirley Temple", "price": "5", "description": "" },
+                    { "name": "Raspberry Lemonade", "price": "5", "description": "" },
+                    { "name": "Milk", "price": "6", "description": "" },
+                    { "name": "Juice", "price": "6", "description": "Apple, Orange, Cranberry, Pineapple, or Pomegranate" },
+                    { "name": "Bubble Tea", "price": "6", "description": "" },
+                    { "name": "Ramune", "price": "6", "description": "" }
+                ]
+            }
+        ]
     }
 ];
 

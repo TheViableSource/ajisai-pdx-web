@@ -11,6 +11,7 @@ const navLinks = [
     { name: "About", href: "/about" },
     { name: "Menus", href: "/menus" },
     { name: "Reservations", href: "/reservations" },
+    { name: "Gift Cards", href: "https://order.toasttab.com/egiftcards/ajisai-beaverton", external: true },
     { name: "Contact", href: "/contact" },
     // { name: "Order Online", href: "#" }, // Hidden for now
 ];
@@ -81,6 +82,7 @@ export function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
+                            {...((link as any).external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                             className={clsx(
                                 "text-sm uppercase tracking-wider font-light hover:text-accent transition-colors",
                                 isScrolled || !isHeroPage
@@ -137,6 +139,7 @@ export function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.href}
+                                    {...((link as any).external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                                     className="text-2xl font-serif text-secondary hover:text-accent"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >

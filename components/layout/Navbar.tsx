@@ -1,34 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
     { name: "About", href: "/about" },
     { name: "Menus", href: "/menus" },
     { name: "Reservations", href: "/reservations" },
-    { name: "Gift Cards", href: "https://order.toasttab.com/egiftcards/ajisai-beaverton", external: true },
     { name: "Contact", href: "/contact" },
-    // { name: "Order Online", href: "#" }, // Hidden for now
 ];
 
-import { usePathname } from "next/navigation";
-
-// ...
+const giftRewardsLinks = [
+    { name: "Gift Cards", href: "https://order.toasttab.com/egiftcards/ajisai-beaverton" },
+    { name: "Rewards Signup", href: "https://www.toasttab.com/ajisai-beaverton/rewardsSignup" },
+    { name: "Check Rewards", href: "https://www.toasttab.com/ajisai-beaverton/rewardsLookup" },
+];
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
+    const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
+    const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const pathname = usePathname();
 
-    // Define pages that have a dark hero image at the top
-    // Define pages that have a dark hero image at the top
-    // Define pages that have a dark hero image at the top
-    const isHeroPage = ["/", "/menus", "/about", "/jobs", "/reservations"].includes(pathname);
+    const isHeroPage = ["/", "/menus", "/about", "/jobs", "/reservations", "/gift-cards-rewards"].includes(pathname);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,6 +38,22 @@ export function Navbar() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Close mobile dropdown when mobile menu closes
+    useEffect(() => {
+        if (!isMobileMenuOpen) setIsMobileDropdownOpen(false);
+    }, [isMobileMenuOpen]);
+
+    const handleDropdownEnter = () => {
+        if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+        setIsDesktopDropdownOpen(true);
+    };
+
+    const handleDropdownLeave = () => {
+        dropdownTimeoutRef.current = setTimeout(() => {
+            setIsDesktopDropdownOpen(false);
+        }, 150);
+    };
 
     return (
         <header
@@ -82,7 +99,6 @@ export function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            {...((link as any).external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                             className={clsx(
                                 "text-sm uppercase tracking-wider font-light hover:text-accent transition-colors",
                                 isScrolled || !isHeroPage
@@ -93,6 +109,62 @@ export function Navbar() {
                             {link.name}
                         </Link>
                     ))}
+
+                    {/* Gift Cards & Rewards Dropdown */}
+                    <div
+                        className="relative"
+                        onMouseEnter={handleDropdownEnter}
+                        onMouseLeave={handleDropdownLeave}
+                    >
+                        <div className="flex items-center gap-1">
+                            <Link
+                                href="/gift-cards-rewards"
+                                className={clsx(
+                                    "text-sm uppercase tracking-wider font-light hover:text-accent transition-colors",
+                                    isScrolled || !isHeroPage
+                                        ? "text-secondary"
+                                        : "text-white"
+                                )}
+                            >
+                                Gift Cards & Rewards
+                            </Link>
+                            <ChevronDown
+                                size={14}
+                                className={clsx(
+                                    "transition-transform duration-200",
+                                    isScrolled || !isHeroPage
+                                        ? "text-secondary"
+                                        : "text-white",
+                                    isDesktopDropdownOpen && "rotate-180"
+                                )}
+                            />
+                        </div>
+
+                        <AnimatePresence>
+                            {isDesktopDropdownOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -8 }}
+                                    transition={{ duration: 0.15 }}
+                                    className="absolute top-full right-0 mt-3 w-56 bg-primary border border-secondary/20 shadow-xl rounded-sm overflow-hidden"
+                                >
+                                    {giftRewardsLinks.map((link) => (
+                                        <a
+                                            key={link.name}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block px-5 py-3 text-sm text-secondary hover:bg-accent hover:text-primary transition-colors duration-200"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
                     <Link
                         href="/reservations"
                         className={clsx(
@@ -139,13 +211,64 @@ export function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    {...((link as any).external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                                     className="text-2xl font-serif text-secondary hover:text-accent"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.name}
                                 </Link>
                             ))}
+
+                            {/* Mobile Gift Cards & Rewards Accordion */}
+                            <div className="flex flex-col items-center">
+                                <div className="flex items-center gap-2">
+                                    <Link
+                                        href="/gift-cards-rewards"
+                                        className="text-2xl font-serif text-secondary hover:text-accent"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        Gift Cards & Rewards
+                                    </Link>
+                                    <button
+                                        className="text-secondary hover:text-accent"
+                                        onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
+                                        aria-expanded={isMobileDropdownOpen}
+                                        aria-label="Toggle Gift Cards & Rewards submenu"
+                                    >
+                                        <ChevronDown
+                                            size={20}
+                                            className={clsx(
+                                                "transition-transform duration-200",
+                                                isMobileDropdownOpen && "rotate-180"
+                                            )}
+                                        />
+                                    </button>
+                                </div>
+                                <AnimatePresence>
+                                    {isMobileDropdownOpen && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.25 }}
+                                            className="overflow-hidden flex flex-col items-center gap-3 mt-3"
+                                        >
+                                            {giftRewardsLinks.map((link) => (
+                                                <a
+                                                    key={link.name}
+                                                    href={link.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-lg text-accent hover:text-secondary transition-colors"
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                >
+                                                    {link.name}
+                                                </a>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
                             <Link
                                 href="/reservations"
                                 className="mt-4 px-8 py-3 border border-secondary text-secondary hover:bg-accent hover:border-accent hover:text-primary transition-all text-xl"

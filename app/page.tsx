@@ -328,6 +328,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* REWARDS PROMO BANNER */}
+      <section className="w-full bg-[#481029] py-16 overflow-hidden">
+        <div className="container mx-auto px-6 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Sparkles className="w-5 h-5 text-[#C5A059]" />
+            <span className="text-xs tracking-[0.25em] uppercase text-[#C5A059] font-bold">Exclusive Offer</span>
+            <Sparkles className="w-5 h-5 text-[#C5A059]" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-serif text-white mb-4 leading-snug">
+            Become an Ajisai Rewards Member
+          </h2>
+          <p className="text-[#C5A059] text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto">
+            Enjoy <span className="font-semibold text-white">200 welcome bonus points</span> — a <span className="font-semibold text-white">$10 value</span> — on us.
+          </p>
+          <a
+            href="https://www.toasttab.com/ajisai-beaverton/rewardsSignup"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#C5A059] text-[#111] px-10 py-4 rounded-sm uppercase tracking-widest text-sm font-bold hover:bg-white transition-colors duration-300"
+          >
+            Join Now — It&apos;s Free
+          </a>
+        </div>
+      </section>
+
       {/* 4. AMBIANCE BANNER */}
       <section className="relative w-full h-[60vh] flex items-center justify-center bg-fixed bg-center bg-cover"
         style={{ backgroundImage: 'url("/sanctuary-bg.jpg")' }}>

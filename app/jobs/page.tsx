@@ -1,60 +1,23 @@
-"use client";
-
-import { useState } from "react";
+import { Metadata } from "next";
 import Image from "next/image";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
-import { motion } from "framer-motion";
-import { sendEmail } from "@/app/actions/sendEmail";
+import { Mail, FileText, Briefcase } from "lucide-react";
+
+export const metadata: Metadata = {
+    title: "Careers | Ajisai Restaurant",
+    description:
+        "Join the Ajisai team. View career opportunities and learn how to apply at our Beaverton, OR location.",
+};
+
+const positions = [
+    "Server",
+    "Sushi Chef",
+    "Kitchen Staff",
+    "Host / Hostess",
+    "Bartender",
+    "Management",
+];
 
 export default function JobsPage() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        position: "",
-        message: "",
-        // Honeypot field - should be left empty by humans
-        confirm_email: "",
-    });
-
-    const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-    const [errorMessage, setErrorMessage] = useState("");
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus("submitting");
-        setErrorMessage("");
-
-        try {
-            const result = await sendEmail({
-                ...formData,
-                formType: "job",
-            });
-
-            if (result.success) {
-                setStatus("success");
-                setFormData({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    position: "",
-                    message: "",
-                    confirm_email: "",
-                });
-            } else {
-                setStatus("error");
-                setErrorMessage(result.error || "Something went wrong. Please try again.");
-            }
-        } catch {
-            setStatus("error");
-            setErrorMessage("Something went wrong. Please try again.");
-        }
-    };
-
     return (
         <div className="bg-secondary min-h-screen text-primary pb-20">
             {/* Hero Section */}
@@ -80,151 +43,64 @@ export default function JobsPage() {
                     </p>
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="bg-white p-8 md:p-12 rounded-sm shadow-xl border-t-4 border-[#C5A059]"
-                >
-                    {status === "success" ? (
-                        <div className="text-center py-12">
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-6">
-                                <CheckCircle className="w-8 h-8 text-green-600" />
-                            </div>
-                            <h3 className="text-2xl font-serif text-[#5D182E] mb-4">Application Received</h3>
-                            <p className="text-gray-600 mb-8">
-                                Thank you for your interest in joining Ajisai. We have received your information and will review it shortly.
-                            </p>
-                            <button
-                                onClick={() => setStatus("idle")}
-                                className="text-[#C5A059] font-medium hover:text-[#5D182E] transition-colors uppercase tracking-widest text-sm"
-                            >
-                                Send Another Inquiry
-                            </button>
+                {/* How to Apply */}
+                <div className="bg-white p-8 md:p-12 rounded-sm shadow-xl border-t-4 border-[#C5A059]">
+                    <div className="text-center mb-10">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F9F4E8] mb-6">
+                            <Mail className="w-8 h-8 text-[#5D182E]" />
                         </div>
-                    ) : (
-                        <form onSubmit={handleSubmit} className="space-y-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Name */}
-                                <div className="space-y-2">
-                                    <label htmlFor="name" className="text-sm uppercase tracking-widest font-semibold text-[#5D182E]">Full Name *</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        required
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full bg-[#F9F4E8] border-b-2 border-transparent focus:border-[#C5A059] px-4 py-3 outline-none transition-colors placeholder:text-gray-400"
-                                        placeholder="John Doe"
-                                    />
-                                </div>
+                        <h3 className="text-2xl font-serif text-[#5D182E] mb-4">How to Apply</h3>
+                        <p className="text-gray-600 leading-relaxed max-w-xl mx-auto">
+                            Please send your resume as a <strong>PDF attachment</strong> to the email address below.
+                            Include the position you are interested in as your subject line.
+                        </p>
+                    </div>
 
-                                {/* Email */}
-                                <div className="space-y-2">
-                                    <label htmlFor="email" className="text-sm uppercase tracking-widest font-semibold text-[#5D182E]">Email Address *</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        required
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full bg-[#F9F4E8] border-b-2 border-transparent focus:border-[#C5A059] px-4 py-3 outline-none transition-colors placeholder:text-gray-400"
-                                        placeholder="john@example.com"
-                                    />
-                                </div>
-                            </div>
+                    {/* Email CTA */}
+                    <div className="text-center mb-12">
+                        <a
+                            href="mailto:manager@ajisaisushisteak.com?subject=Job%20Application%20-%20[Position]"
+                            className="inline-flex items-center gap-3 bg-[#5D182E] text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm hover:bg-[#C5A059] hover:text-white transition-all duration-300"
+                        >
+                            <Mail className="w-5 h-5" />
+                            manager@ajisaisushisteak.com
+                        </a>
+                    </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Phone */}
-                                <div className="space-y-2">
-                                    <label htmlFor="phone" className="text-sm uppercase tracking-widest font-semibold text-[#5D182E]">Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        id="phone"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        className="w-full bg-[#F9F4E8] border-b-2 border-transparent focus:border-[#C5A059] px-4 py-3 outline-none transition-colors placeholder:text-gray-400"
-                                        placeholder="(555) 123-4567"
-                                    />
-                                </div>
+                    {/* Instructions */}
+                    <div className="bg-[#F9F4E8] p-6 md:p-8 rounded-sm space-y-4">
+                        <h4 className="font-serif text-lg text-[#5D182E] mb-4">Please include:</h4>
+                        <ul className="space-y-3">
+                            <li className="flex items-start gap-3">
+                                <FileText className="w-5 h-5 text-[#C5A059] mt-0.5 shrink-0" />
+                                <span className="text-gray-700">Your resume in <strong>PDF format</strong></span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <Briefcase className="w-5 h-5 text-[#C5A059] mt-0.5 shrink-0" />
+                                <span className="text-gray-700">The <strong>position</strong> you are applying for in the subject line</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <Mail className="w-5 h-5 text-[#C5A059] mt-0.5 shrink-0" />
+                                <span className="text-gray-700">A brief introduction and any <strong>relevant experience</strong></span>
+                            </li>
+                        </ul>
+                    </div>
 
-                                {/* Position */}
-                                <div className="space-y-2">
-                                    <label htmlFor="position" className="text-sm uppercase tracking-widest font-semibold text-[#5D182E]">Position of Interest *</label>
-                                    <select
-                                        id="position"
-                                        name="position"
-                                        required
-                                        value={formData.position}
-                                        onChange={handleChange}
-                                        className="w-full bg-[#F9F4E8] border-b-2 border-transparent focus:border-[#C5A059] px-4 py-3 outline-none transition-colors text-gray-700"
-                                    >
-                                        <option value="" disabled>Select a position</option>
-                                        <option value="Server">Server</option>
-                                        <option value="Sushi Chef">Sushi Chef</option>
-                                        <option value="Kitchen Staff">Kitchen Staff</option>
-                                        <option value="Host/Hostess">Host/Hostess</option>
-                                        <option value="Bartender">Bartender</option>
-                                        <option value="Management">Management</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            {/* Message */}
-                            <div className="space-y-2">
-                                <label htmlFor="message" className="text-sm uppercase tracking-widest font-semibold text-[#5D182E]">Experience / Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows={5}
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    className="w-full bg-[#F9F4E8] border-b-2 border-transparent focus:border-[#C5A059] px-4 py-3 outline-none transition-colors placeholder:text-gray-400 resize-none"
-                                    placeholder="Tell us about your relevant experience..."
-                                ></textarea>
-                            </div>
-
-                            {/* HONEYPOT FIELD - Hidden from users, visible to bots */}
-                            <div className="hidden absolute opacity-0 -z-10 h-0 w-0 overflow-hidden">
-                                <label htmlFor="confirm_email">Do not fill this out if you are human</label>
-                                <input
-                                    type="text"
-                                    id="confirm_email"
-                                    name="confirm_email"
-                                    value={formData.confirm_email}
-                                    onChange={handleChange}
-                                    tabIndex={-1}
-                                    autoComplete="off"
-                                />
-                            </div>
-
-                            {status === "error" && (
-                                <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-sm text-red-700">
-                                    <AlertCircle className="w-5 h-5 shrink-0" />
-                                    <p className="text-sm">{errorMessage}</p>
-                                </div>
-                            )}
-
-                            <button
-                                type="submit"
-                                disabled={status === "submitting"}
-                                className="w-full bg-[#5D182E] text-white py-4 font-serif uppercase tracking-widest hover:bg-[#C5A059] hover:text-white transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
-                            >
-                                {status === "submitting" ? (
-                                    "Sending..."
-                                ) : (
-                                    <>
-                                        Submit Application <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </>
-                                )}
-                            </button>
-                        </form>
-                    )}
-                </motion.div>
+                    {/* Positions */}
+                    <div className="mt-10">
+                        <h4 className="font-serif text-lg text-[#5D182E] text-center mb-6">Positions We Commonly Hire For</h4>
+                        <div className="flex flex-wrap justify-center gap-3">
+                            {positions.map((position) => (
+                                <span
+                                    key={position}
+                                    className="px-5 py-2 bg-[#F9F4E8] text-[#5D182E] text-sm tracking-wider border border-[#5D182E]/10 rounded-sm"
+                                >
+                                    {position}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

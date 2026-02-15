@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: "*",
             allow: "/",
-            disallow: "/private/",
+            disallow: ["/private/", "/jobs"],
         },
         sitemap: "https://ajisai-portland.com/sitemap.xml",
     };

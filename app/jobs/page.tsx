@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import { Mail, FileText, Briefcase } from "lucide-react";
+import { FileText, Briefcase, Mail } from "lucide-react";
+import { EmailLink } from "./EmailLink";
 
 export const metadata: Metadata = {
     title: "Careers | Ajisai Restaurant",
     description:
         "Join the Ajisai team. View career opportunities and learn how to apply at our Beaverton, OR location.",
+    robots: { index: false, follow: false },
 };
 
 const positions = [
@@ -14,7 +16,6 @@ const positions = [
     "Kitchen Staff",
     "Host / Hostess",
     "Bartender",
-    "Management",
 ];
 
 export default function JobsPage() {
@@ -56,15 +57,9 @@ export default function JobsPage() {
                         </p>
                     </div>
 
-                    {/* Email CTA */}
+                    {/* Email CTA — rendered client-side to prevent scraping */}
                     <div className="text-center mb-12">
-                        <a
-                            href="mailto:manager@ajisaisushisteak.com?subject=Job%20Application%20-%20[Position]"
-                            className="inline-flex items-center gap-3 bg-[#5D182E] text-white px-8 py-4 rounded-sm uppercase tracking-widest text-sm hover:bg-[#C5A059] hover:text-white transition-all duration-300"
-                        >
-                            <Mail className="w-5 h-5" />
-                            manager@ajisaisushisteak.com
-                        </a>
+                        <EmailLink />
                     </div>
 
                     {/* Instructions */}

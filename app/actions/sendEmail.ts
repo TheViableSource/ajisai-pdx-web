@@ -3,56 +3,57 @@
 import nodemailer from "nodemailer";
 
 interface FormData {
-    name: string;
-    email: string;
-    phone?: string;
-    position: string;
-    message?: string;
-    confirm_email?: string; // Honeypot field
-    formType?: "job" | "contact";
+  name: string;
+  email: string;
+  phone?: string;
+  position: string;
+  message?: string;
+  confirm_email?: string; // Honeypot field
+  formType?: "job" | "contact";
 }
 
 interface ActionResult {
-    success: boolean;
-    error?: string;
+  success: boolean;
+  error?: string;
 }
 
 export async function sendEmail(data: FormData): Promise<ActionResult> {
-    // Honeypot check — if filled, silently succeed without sending
-    if (data.confirm_email) {
-        return { success: true };
-    }
+  // Honeypot check — if filled, silently succeed without sending
+  if (data.confirm_email) {
+    return { success: true };
+  }
 
-    // Validate required fields
-    if (!data.name || !data.email || !data.position) {
-        return { success: false, error: "Please fill in all required fields." };
-    }
+  // Validate required fields
+  if (!data.name || !data.email || !data.position) {
+    return { success: false, error: "Please fill in all required fields." };
+  }
 
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_EMAIL } =
-        process.env;
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_TO, SMTP_SECURE } =
+    process.env;
 
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_EMAIL) {
-        console.error("Missing SMTP environment variables");
-        return {
-            success: false,
-            error: "Email service is not configured. Please try again later.",
-        };
-    }
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_TO) {
+    console.error("Missing SMTP environment variables");
+    return {
+      success: false,
+      error: "Email service is not configured. Please try again later.",
+    };
+  }
 
-    const transporter = nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: parseInt(SMTP_PORT, 10),
-        secure: parseInt(SMTP_PORT, 10) === 465,
-        auth: {
-            user: SMTP_USER,
-            pass: SMTP_PASS,
-        },
-    });
+  const port = parseInt(SMTP_PORT, 10);
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port,
+    secure: SMTP_SECURE ? SMTP_SECURE === "true" : port === 465,
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASS,
+    },
+  });
 
-    const formLabel =
-        data.formType === "contact" ? "Contact Inquiry" : "Job Application";
+  const formLabel =
+    data.formType === "contact" ? "Contact Inquiry" : "Job Application";
 
-    const htmlBody = `
+  const htmlBody = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: #481029; padding: 24px; text-align: center;">
         <h1 style="color: #C5A059; margin: 0; font-size: 24px;">Ajisai — New ${formLabel}</h1>
@@ -68,23 +69,23 @@ export async function sendEmail(data: FormData): Promise<ActionResult> {
             <td style="padding: 12px 8px; color: #333;"><a href="mailto:${data.email}" style="color: #5D182E;">${data.email}</a></td>
           </tr>
           ${data.phone
-            ? `<tr>
+      ? `<tr>
             <td style="padding: 12px 8px; font-weight: bold; color: #481029; vertical-align: top;">Phone:</td>
             <td style="padding: 12px 8px; color: #333;">${data.phone}</td>
           </tr>`
-            : ""
-        }
+      : ""
+    }
           <tr>
             <td style="padding: 12px 8px; font-weight: bold; color: #481029; vertical-align: top;">Position:</td>
             <td style="padding: 12px 8px; color: #333;">${data.position}</td>
           </tr>
           ${data.message
-            ? `<tr>
+      ? `<tr>
             <td style="padding: 12px 8px; font-weight: bold; color: #481029; vertical-align: top;">Message:</td>
             <td style="padding: 12px 8px; color: #333; white-space: pre-wrap;">${data.message}</td>
           </tr>`
-            : ""
-        }
+      : ""
+    }
         </table>
       </div>
       <div style="padding: 16px; text-align: center; font-size: 12px; color: #999;">
@@ -93,21 +94,21 @@ export async function sendEmail(data: FormData): Promise<ActionResult> {
     </div>
   `;
 
-    try {
-        await transporter.sendMail({
-            from: `"Ajisai Website" <${SMTP_USER}>`,
-            to: CONTACT_EMAIL,
-            replyTo: data.email,
-            subject: `[Ajisai] New ${formLabel} from ${data.name}`,
-            html: htmlBody,
-        });
+  try {
+    await transporter.sendMail({
+      from: `"Ajisai Website" <${SMTP_FROM || SMTP_USER}>`,
+      to: SMTP_TO,
+      replyTo: data.email,
+      subject: `[Ajisai] New ${formLabel} from ${data.name}`,
+      html: htmlBody,
+    });
 
-        return { success: true };
-    } catch (error) {
-        console.error("Email send error:", error);
-        return {
-            success: false,
-            error: "Failed to send your message. Please try again later.",
-        };
-    }
+    return { success: true };
+  } catch (error) {
+    console.error("Email send error:", error);
+    return {
+      success: false,
+      error: "Failed to send your message. Please try again later.",
+    };
+  }
 }

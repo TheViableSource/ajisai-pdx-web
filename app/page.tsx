@@ -59,21 +59,21 @@ const TiltCard = ({ src, alt }: { src: string, alt: string }) => {
 const REVIEWS = [
   {
     id: 1,
-    text: "An absolute gem in Beaverton. The Omakase experience was akin to dining in Tokyo. The attention to detail is unmatched.",
-    author: "Sarah J.",
-    source: "OpenTable Diner"
+    text: "One of my new favorite spots! Great food, nice atmosphere, and very happy with the service. Would definitely come back.",
+    author: "Julie A.",
+    source: "Google Review"
   },
   {
     id: 2,
-    text: "Finally, authentic Tonkotsu in Portland. The broth is rich without being heavy, and the atmosphere is simply stunning.",
-    author: "Michael Chen",
-    source: "Local Guide"
+    text: "We had our Valentine's date early dinner, thank you's to Hannah our server and to Joseph the Restaurant/Bar Manager, for being kind and great service and of course the food was delicious!",
+    author: "Maria L.",
+    source: "Google Review"
   },
   {
     id: 3,
-    text: "The Wagyu steak was perfection. A romantic, upscale vibe that we have been missing in this city. Highly recommended.",
-    author: "The Oregonian",
-    source: "Food Critic"
+    text: "Chef Tre was terrific and Mimi is a miracle, I don't know how they stay so on point but the service was amazing and the food was delicious, steaks cooked to perfection. 10/10 will definitely be back.",
+    author: "Sara A.",
+    source: "Google Review"
   }
 ];
 

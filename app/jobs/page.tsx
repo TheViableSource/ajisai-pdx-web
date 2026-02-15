@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { sendEmail } from "@/app/actions/sendEmail";
 
 export default function JobsPage() {
     const [formData, setFormData] = useState({
@@ -17,36 +18,41 @@ export default function JobsPage() {
     });
 
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("submitting");
+        setErrorMessage("");
 
-        // Spam Protection: Check if honeypot field is filled
-        if (formData.confirm_email) {
-            // Silently fail for bots - pretend it worked but do nothing
-            console.log("Spam detected: Honeypot field filled.");
-            setTimeout(() => setStatus("success"), 1000);
-            return;
-        }
-
-        // Simulate API call
-        setTimeout(() => {
-            console.log("Form submitted locally:", formData);
-            setStatus("success");
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                position: "",
-                message: "",
-                confirm_email: "",
+        try {
+            const result = await sendEmail({
+                ...formData,
+                formType: "job",
             });
-        }, 1500);
+
+            if (result.success) {
+                setStatus("success");
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    position: "",
+                    message: "",
+                    confirm_email: "",
+                });
+            } else {
+                setStatus("error");
+                setErrorMessage(result.error || "Something went wrong. Please try again.");
+            }
+        } catch {
+            setStatus("error");
+            setErrorMessage("Something went wrong. Please try again.");
+        }
     };
 
     return (
@@ -195,6 +201,13 @@ export default function JobsPage() {
                                     autoComplete="off"
                                 />
                             </div>
+
+                            {status === "error" && (
+                                <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-sm text-red-700">
+                                    <AlertCircle className="w-5 h-5 shrink-0" />
+                                    <p className="text-sm">{errorMessage}</p>
+                                </div>
+                            )}
 
                             <button
                                 type="submit"

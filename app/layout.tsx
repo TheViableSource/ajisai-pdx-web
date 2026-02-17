@@ -63,6 +63,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo-new.png",
   },
+  verification: {
+    google: "jhrc9F0gjcc2KTPK-1iTwgfe6jU_OmzoF_nJI2YO70o",
+  },
 };
 
 const jsonLd = {

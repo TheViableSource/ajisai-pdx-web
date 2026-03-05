@@ -113,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${inter.variable}`}>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-NGDPMDZ0W4"
         strategy="afterInteractive"

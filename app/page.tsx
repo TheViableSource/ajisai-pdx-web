@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, ArrowUp, Star, Quote, Sparkles } from "lucide-react";
 import { useEffect, useState, useRef, MouseEvent } from "react";
-import GrandOpeningPopup from "@/components/home/GrandOpeningPopup";
+// import GrandOpeningPopup from "@/components/home/GrandOpeningPopup";
 
 // --- NEW COMPONENT: 3D TILT CARD ---
 // This makes the images feel "alive" by following the mouse
@@ -106,8 +106,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between relative">
 
-      {/* --- GRAND OPENING POPUP --- */}
+      {/* --- GRAND OPENING POPUP (hidden for now, uncomment to re-enable) ---
       <GrandOpeningPopup />
+      */}
 
       {/* --- SCROLL TO TOP BUTTON --- */}
       <button
